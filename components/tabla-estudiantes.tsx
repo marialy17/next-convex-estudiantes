@@ -49,46 +49,53 @@ export function TablaEstudiantes() {
 
   return (
     <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Matrícula</TableHead>
-            <TableHead>Nombre</TableHead>
-            <TableHead>Correo</TableHead>
-            <TableHead>Carrera</TableHead>
-            <TableHead>Grado</TableHead>
-            <TableHead className="text-center">Acciones</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {estudiantes.length === 0 ? (
+      <div className="flex flex-col p-4">
+        <div className="flex justify-between p-4">
+          <p className="text-lg font-semibold">Lista de Estudiantes</p>
+          <div className="flex justify-end"><DialogEstudiante /></div>
+        </div>
+
+
+        <Table>
+          <TableHeader>
             <TableRow>
-              <TableCell colSpan={6} className="text-center h-24">
-                No hay estudiantes registrados
-              </TableCell>
+              <TableHead className="w-[100px]">Matrícula</TableHead>
+              <TableHead>Nombre</TableHead>
+              <TableHead>Correo</TableHead>
+              <TableHead>Carrera</TableHead>
+              <TableHead>Grado</TableHead>
+              <TableHead className="text-center">Acciones</TableHead>
             </TableRow>
-          ) : (
-            estudiantes.map((estudiante) => (
-              <TableRow key={estudiante._id}>
-                <TableCell className="font-medium">
-                  {estudiante.numeroMatricula}
-                </TableCell>
-                <TableCell>{estudiante.nombre}</TableCell>
-                <TableCell>{estudiante.correo}</TableCell>
-                <TableCell>{estudiante.carrera}</TableCell>
-                <TableCell>{estudiante.grado}</TableCell>
-                <TableCell >
-                  <div className="flex gap-2 justify-end">
-                      <DialogEstudiante />
-                      <DialogEliminarEstudiante id={estudiante._id}/>
-                      <DialogEstudiante estudiante={estudiante} />
-                  </div>
+          </TableHeader>
+          <TableBody>
+            {estudiantes.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={6} className="text-center h-24">
+                  No hay estudiantes registrados
                 </TableCell>
               </TableRow>
-            ))
-          )}
-        </TableBody>
-      </Table>
+            ) : (
+              estudiantes.map((estudiante) => (
+                <TableRow key={estudiante._id}>
+                  <TableCell className="font-medium">
+                    {estudiante.numeroMatricula}
+                  </TableCell>
+                  <TableCell>{estudiante.nombre}</TableCell>
+                  <TableCell>{estudiante.correo}</TableCell>
+                  <TableCell>{estudiante.carrera}</TableCell>
+                  <TableCell>{estudiante.grado}</TableCell>
+                  <TableCell >
+                    <div className="flex gap-2 justify-end">
+                      <DialogEliminarEstudiante id={estudiante._id} />
+                      <DialogEstudiante estudiante={estudiante} />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }
