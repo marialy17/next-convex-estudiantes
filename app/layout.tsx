@@ -8,7 +8,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider"
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import "@/styles/globals.css"; 
+import "@/styles/globals.css";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 
 /**
@@ -72,20 +72,22 @@ export default function RootLayout({ children }: RootLayoutProps): React.ReactEl
     <html lang="es" suppressHydrationWarning>
       <head />
       <body className="min-h-screen bg-background font-sans antialiased">
-        <ConvexClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div className="relative flex min-h-screen flex-col">
+
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="relative flex min-h-screen flex-col">
+            <ConvexClientProvider>
               <Navbar />
               <main className="flex-1">{children}</main>
               <Footer />
-            </div>
-          </ThemeProvider>
-        </ConvexClientProvider>
+            </ConvexClientProvider>
+          </div>
+        </ThemeProvider>
+
       </body>
     </html>
   );

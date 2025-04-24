@@ -5,47 +5,90 @@ import { api } from "@/convex/_generated/api";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { DialogEstudiante } from "./dialog-estudiante";
+import { Skeleton } from "@/components/ui/skeleton";
+import { DialogEliminarEstudiante } from "./dialog-eliminar-estudiante";
 
 export function TablaEstudiantes() {
   const estudiantes = useQuery(api.estudiantes.obtenerEstudiantes);
 
+  // Estado de carga mejorado
   if (estudiantes === undefined) {
-    return <div>Cargando estudiantes...</div>;
+    return (
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              {[...Array(6)].map((_, i) => (
+                <TableHead key={i}>
+                  <Skeleton className="h-4 w-[100px]" />
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {[...Array(5)].map((_, i) => (
+              <TableRow key={i}>
+                {[...Array(6)].map((_, j) => (
+                  <TableCell key={j}>
+                    <Skeleton className="h-4 w-[80%]" />
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    );
   }
 
   return (
-    <Table>
-      <TableCaption>Lista de estudiantes registrados</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Matrícula</TableHead>
-          <TableHead>Nombre</TableHead>
-          <TableHead>Correo</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {estudiantes.length === 0 ? (
+    <div className="rounded-md border">
+      <Table>
+        <TableHeader>
           <TableRow>
-            <TableCell colSpan={3} className="text-center">
-              No hay estudiantes registrados
-            </TableCell>
+            <TableHead className="w-[100px]">Matrícula</TableHead>
+            <TableHead>Nombre</TableHead>
+            <TableHead>Correo</TableHead>
+            <TableHead>Carrera</TableHead>
+            <TableHead>Grado</TableHead>
+            <TableHead className="text-center">Acciones</TableHead>
           </TableRow>
-        ) : (
-          estudiantes.map((estudiante) => (
-            <TableRow key={estudiante._id}>
-              <TableCell>{estudiante.numeroMatricula}</TableCell>
-              <TableCell>{estudiante.nombre}</TableCell>
-              <TableCell>{estudiante.correo}</TableCell>
+        </TableHeader>
+        <TableBody>
+          {estudiantes.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={6} className="text-center h-24">
+                No hay estudiantes registrados
+              </TableCell>
             </TableRow>
-          ))
-        )}
-      </TableBody>
-    </Table>
+          ) : (
+            estudiantes.map((estudiante) => (
+              <TableRow key={estudiante._id}>
+                <TableCell className="font-medium">
+                  {estudiante.numeroMatricula}
+                </TableCell>
+                <TableCell>{estudiante.nombre}</TableCell>
+                <TableCell>{estudiante.correo}</TableCell>
+                <TableCell>{estudiante.carrera}</TableCell>
+                <TableCell>{estudiante.grado}</TableCell>
+                <TableCell >
+                  <div className="flex gap-2 justify-end">
+                      <DialogEstudiante />
+                      <DialogEliminarEstudiante id={estudiante._id}/>
+                      <DialogEstudiante estudiante={estudiante} />
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))
+          )}
+        </TableBody>
+      </Table>
+    </div>
   );
 }
