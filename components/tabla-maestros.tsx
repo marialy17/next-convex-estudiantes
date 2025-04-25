@@ -10,7 +10,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DialogEstudiante } from "./dialog-estudiante";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DialogEliminarMaestro } from "./dialog-eliminar-maestro";
 import { DialogMaestro } from "./dialog-maestro";

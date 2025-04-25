@@ -109,6 +109,13 @@ export function DialogMaestro({
             setError("Ocurrió un error al procesar la solicitud" + err); // Muestra un mensaje de error.
         } finally {
             setIsSubmitting(false); // Finaliza el estado de envío.
+            setFormData({
+                numeroEmpleado: "",
+                nombre: "",
+                correo: "",
+                departamento: "",
+                gradoAcademico: "",
+            }); // Reinicia los datos del formulario. 
         }
     };
 
