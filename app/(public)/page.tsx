@@ -4,8 +4,8 @@
  *   Implementa un diseño centrado y responsive para el contenido inicial.
  */
 
-import { TablaMaestros } from "@/components/tabla-maestros";
-import { TablaEstudiantes } from "@/components/tabla-estudiantes";
+import { TablaMaestros } from "@/app/(app)/maestro/tabla-maestros";
+import { TablaEstudiantes } from "@/app/(app)/estudiante/tabla-estudiantes";
 
 export default function Home() {
   return (

@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import "@/styles/globals.css";
-import { ConvexClientProvider } from "@/app/ConvexClientProvider";
+import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 
 /**
  * * Metadatos globales de la aplicación.

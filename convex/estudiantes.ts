@@ -48,3 +48,11 @@ export const eliminarEstudiante = mutation({
     return true;
   },
 });
+
+// Obtener un estudiante por ID (query)
+export const obtenerEstudiantePorId = query({
+  args: { id: v.id("estudiantes") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
+  },
+});

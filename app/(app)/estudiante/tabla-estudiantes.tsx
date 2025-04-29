@@ -11,14 +11,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DialogEliminarMaestro } from "./dialog-eliminar-maestro";
-import { DialogMaestro } from "./dialog-maestro";
+import { Button } from "@/components/ui/button";
+import { CirclePlus, Edit } from "lucide-react";
+import Link from "next/link";
+import { DialogEliminarEstudiante } from "./dialog-eliminar-estudiante";
 
-export function TablaMaestros() {
-  const maestros = useQuery(api.maestros.obtenerMaestros);
+export function TablaEstudiantes() {
+  const estudiantes = useQuery(api.estudiantes.obtenerEstudiantes);
 
   // Estado de carga mejorado
-  if (maestros === undefined) {
+  if (estudiantes === undefined) {
     return (
       <div className="rounded-md border">
         <Table>
@@ -51,43 +53,52 @@ export function TablaMaestros() {
     <div className="rounded-md border">
       <div className="flex flex-col p-4">
         <div className="flex justify-between p-4">
-          <p className="text-lg font-semibold">Lista de Maestros</p>
-          <div className="flex justify-end"><DialogMaestro /></div>
+          <p className="text-lg font-semibold">Lista de Estudiantes</p>
+          <div className="flex justify-end">
+            <Link href="/estudiante/nuevo">
+              <Button variant="outline" size="icon">
+                <CirclePlus className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
-
 
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">No. Empleado</TableHead>
+              <TableHead className="w-[100px]">Matrícula</TableHead>
               <TableHead>Nombre</TableHead>
               <TableHead>Correo</TableHead>
-              <TableHead>Departamento</TableHead>
-              <TableHead>Grado académico</TableHead>
+              <TableHead>Carrera</TableHead>
+              <TableHead>Grado</TableHead>
               <TableHead className="text-center">Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {maestros.length === 0 ? (
+            {estudiantes.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={6} className="text-center h-24">
-                  No hay maestros registrados
+                  No hay estudiantes registrados
                 </TableCell>
               </TableRow>
             ) : (
-                maestros.map((maestro) => (
-                <TableRow key={maestro._id}>
+              estudiantes.map((estudiante) => (
+                <TableRow key={estudiante._id}>
                   <TableCell className="font-medium">
-                    {maestro.numeroEmpleado}
+                    {estudiante.numeroMatricula}
                   </TableCell>
-                  <TableCell>{maestro.nombre}</TableCell>
-                  <TableCell>{maestro.correo}</TableCell>
-                  <TableCell>{maestro.departamento}</TableCell>
-                  <TableCell>{maestro.gradoAcademico}</TableCell>
-                  <TableCell >
+                  <TableCell>{estudiante.nombre}</TableCell>
+                  <TableCell>{estudiante.correo}</TableCell>
+                  <TableCell>{estudiante.carrera}</TableCell>
+                  <TableCell>{estudiante.grado}</TableCell>
+                  <TableCell>
                     <div className="flex gap-2 justify-end">
-                      <DialogEliminarMaestro id={maestro._id} />
-                      <DialogMaestro maestro={maestro} />
+                      <DialogEliminarEstudiante id={estudiante._id} />
+                      <Link href={`/estudiante/editar/${estudiante._id}`}>
+                        <Button variant="outline" size="icon">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                      </Link>
                     </div>
                   </TableCell>
                 </TableRow>
