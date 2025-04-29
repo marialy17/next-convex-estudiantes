@@ -5,7 +5,7 @@
  */
 
 import { TablaMaestros } from "@/components/tabla-maestros";
-import { TablaEstudiantes } from "../components/tabla-estudiantes";
+import { TablaEstudiantes } from "@/components/tabla-estudiantes";
 
 export default function Home() {
   return (
