@@ -13,6 +13,8 @@ import { School, BookOpen, Menu, X } from "lucide-react";
 import { Button } from "@/app/_styles/components/ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { UserButton, SignInButton, useUser, SignedOut, SignedIn, SignUp, SignUpButton } from '@clerk/nextjs';
+
 
 const APP_TITLE = "Escuela GM" as const;
 
@@ -56,6 +58,7 @@ const APP_TITLE = "Escuela GM" as const;
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isSignedIn } = useUser();
 
   const routes = [
     {
@@ -86,10 +89,10 @@ export const Navbar: React.FC = () => {
             <h4 className="font-semibold text-lg">{APP_TITLE}</h4>
           </Link>
         </div>
-        
+
         {/* Mobile menu button */}
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           className="md:hidden ml-auto"
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
@@ -98,7 +101,7 @@ export const Navbar: React.FC = () => {
         </Button>
 
         {/* Desktop navigation */}
-        <nav 
+        <nav
           className="hidden md:flex items-center space-x-4 ml-6 flex-1"
           aria-label="Navegación principal"
         >
@@ -122,6 +125,21 @@ export const Navbar: React.FC = () => {
         {/* Controles */}
         <div className="ml-auto hidden md:flex">
           <ThemeToggle />
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="px-3 py-1 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition-colors">
+                Iniciar sesión
+              </button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <button className="px-3 py-1 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition-colors">
+                Registrarse
+              </button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </div>
 

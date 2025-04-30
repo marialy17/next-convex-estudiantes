@@ -10,6 +10,8 @@ import { Navbar } from "@/app/_styles/components/layout/navbar";
 import { Footer } from "@/app/_styles/components/layout/footer";
 import "@/app/_styles/globals.css";
 import { ConvexClientProvider } from "@/app/_styles/components/ConvexClientProvider";
+import { ClerkProvider } from "@clerk/nextjs";
+import { neobrutalism } from '@clerk/themes'
 
 /**
  * * Metadatos globales de la aplicación.
@@ -69,26 +71,30 @@ type RootLayoutProps = Readonly<{
  */
 export default function RootLayout({ children }: RootLayoutProps): React.ReactElement {
   return (
-    <html lang="es" suppressHydrationWarning>
-      <head />
-      <body className="min-h-screen bg-background font-sans antialiased">
+    <ClerkProvider appearance={{
+      baseTheme: [neobrutalism],
+    }}>
+      <html lang="es" suppressHydrationWarning>
+        <head />
+        <body className="min-h-screen bg-background font-sans antialiased">
 
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="relative flex min-h-screen flex-col">
-            <ConvexClientProvider>
-              <Navbar />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </ConvexClientProvider>
-          </div>
-        </ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="relative flex min-h-screen flex-col">
+              <ConvexClientProvider>
+                <Navbar />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </ConvexClientProvider>
+            </div>
+          </ThemeProvider>
 
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
