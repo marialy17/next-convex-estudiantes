@@ -1,3 +1,4 @@
+//app/(app)/estudiante/tabla-estudiantes.tsx
 "use client";
 
 import { useQuery } from "convex/react";
@@ -26,7 +27,7 @@ export function TablaEstudiantes() {
         <Table>
           <TableHeader>
             <TableRow>
-              {[...Array(6)].map((_, i) => (
+              {[...Array(7)].map((_, i) => (
                 <TableHead key={i}>
                   <Skeleton className="h-4 w-[100px]" />
                 </TableHead>
@@ -36,7 +37,7 @@ export function TablaEstudiantes() {
           <TableBody>
             {[...Array(5)].map((_, i) => (
               <TableRow key={i}>
-                {[...Array(6)].map((_, j) => (
+                {[...Array(7)].map((_, j) => (
                   <TableCell key={j}>
                     <Skeleton className="h-4 w-[80%]" />
                   </TableCell>
@@ -71,13 +72,14 @@ export function TablaEstudiantes() {
               <TableHead>Correo</TableHead>
               <TableHead>Carrera</TableHead>
               <TableHead>Grado</TableHead>
+              <TableHead>Edad</TableHead>
               <TableHead className="text-center">Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {estudiantes.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center h-24">
+                <TableCell colSpan={7} className="text-center h-24">
                   No hay estudiantes registrados
                 </TableCell>
               </TableRow>
@@ -91,8 +93,9 @@ export function TablaEstudiantes() {
                   <TableCell>{estudiante.correo}</TableCell>
                   <TableCell>{estudiante.carrera}</TableCell>
                   <TableCell>{estudiante.grado}</TableCell>
+                  <TableCell>{estudiante.edad !== undefined ? `${estudiante.edad} años` : 'N/A'}</TableCell>
                   <TableCell>
-                  <div className="flex gap-2 justify-end">
+                    <div className="flex gap-2 justify-end">
                       <DialogEliminarEstudiante id={estudiante._id} />
                       <Link href={`/estudiante/ver/${estudiante._id}`}>
                         <Button variant="outline" size="icon">

@@ -1,3 +1,4 @@
+//app/(app)/estudiante/ver/[id]/page.tsx
 "use client";
 
 import { Button } from "@/app/_styles/components/ui/button";
@@ -42,7 +43,7 @@ export default function VerEstudiantePage({ params }: { params: Promise<{ id: st
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(6)].map((_, i) => (
                   <div key={i} className="flex flex-col">
                     <Skeleton className="h-4 w-24 mb-2" />
                     <Skeleton className="h-6 w-full" />
@@ -107,7 +108,7 @@ export default function VerEstudiantePage({ params }: { params: Promise<{ id: st
             <div className="flex gap-2">
               <DialogEliminarEstudiante 
                 id={estudiante._id} 
-                onSuccess={() => router.push("/")} 
+                onSuccess={() => router.push("/estudiante")} 
               />
               <Link href={`/estudiante/editar/${estudiante._id}`}>
                 <Button variant="outline" size="icon">
@@ -134,6 +135,13 @@ export default function VerEstudiantePage({ params }: { params: Promise<{ id: st
                 <div>
                   <h3 className="text-sm font-medium text-gray-500">Grado</h3>
                   <p className="text-base font-medium mt-1">{estudiante.grado}</p>
+                </div>
+                {/* Nuevo campo para mostrar la edad */}
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">Edad</h3>
+                  <p className="text-base font-medium mt-1">
+                    {estudiante.edad !== undefined ? `${estudiante.edad} años` : 'No especificada'}
+                  </p>
                 </div>
               </div>
             </div>

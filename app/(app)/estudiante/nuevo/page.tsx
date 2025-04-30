@@ -1,3 +1,4 @@
+//app/(app)/estudiante/nuevo/page.tsx
 "use client";
 
 import { FormularioEstudiante } from "../formulario-estudiante";
@@ -27,7 +28,7 @@ export default function NuevoEstudiantePage() {
           <FormularioEstudiante 
             onSuccess={() => {
               // Redirige a la página principal después de crear exitosamente
-              router.push("/");
+              router.push("/estudiante");
             }}
           />
         </div>

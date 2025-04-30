@@ -1,22 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { Id } from "./_generated/dataModel";
-
-// Obtener todos los maestros (query)
-export const obtenerMaestros = query({
-  args: {},
-  handler: async (ctx) => {
-    return await ctx.db.query("maestros").collect();
-  },
-});
-
-// Obtener un maestro por ID (query)
-export const obtenerMaestroPorId = query({
-  args: { id: v.id("maestros") },
-  handler: async (ctx, args) => {
-    return await ctx.db.get(args.id);
-  },
-});
 
 // Crear un maestro (mutation)
 export const crearMaestro = mutation({
@@ -36,6 +19,14 @@ export const crearMaestro = mutation({
       especialidad: args.especialidad,
     });
     return nuevoId;
+  },
+});
+
+// Obtener todos los maestros (query)
+export const obtenerMaestros = query({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db.query("maestros").collect();
   },
 });
 
@@ -62,5 +53,13 @@ export const eliminarMaestro = mutation({
   handler: async (ctx, args) => {
     await ctx.db.delete(args.id);
     return args.id;
+  },
+});
+
+// Obtener un maestro por ID (query)
+export const obtenerMaestroPorId = query({
+  args: { id: v.id("maestros") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
   },
 });

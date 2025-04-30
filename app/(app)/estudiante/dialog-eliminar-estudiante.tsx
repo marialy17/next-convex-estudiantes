@@ -1,3 +1,4 @@
+//app/(app)/estudiante/dialog-eliminar-estudiante.tsx
 "use client";
 
 import { Button } from "@/app/_styles/components/ui/button";

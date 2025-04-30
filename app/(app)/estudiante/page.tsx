@@ -1,3 +1,4 @@
+//app/(app)/estudiante/page.tsx
 "use client";
 
 import { TablaEstudiantes } from "./tabla-estudiantes";

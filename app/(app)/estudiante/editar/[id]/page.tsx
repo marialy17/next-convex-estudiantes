@@ -1,3 +1,4 @@
+//app/(app)/estudiante/editar/[id]/page.tsx
 "use client";
 
 import { FormularioEstudiante } from "../../formulario-estudiante";
