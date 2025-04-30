@@ -1,11 +1,11 @@
 "use client";
 
-import { FormularioEstudiante } from "../formulario-estudiante";
+import { FormularioMaestro } from "../formulario-maestro";
 import { Button } from "@/app/_styles/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function NuevoEstudiantePage() {
+export default function NuevoMaestroPage() {
   const router = useRouter();
 
   return (
@@ -21,13 +21,13 @@ export default function NuevoEstudiantePage() {
             >
               <ArrowLeft className="h-4 w-4 mr-1" /> Volver
             </Button>
-            <h1 className="text-xl sm:text-2xl font-bold">Nuevo Estudiante</h1>
+            <h1 className="text-xl sm:text-2xl font-bold">Nuevo Maestro</h1>
           </div>
 
-          <FormularioEstudiante 
+          <FormularioMaestro 
             onSuccess={() => {
-              // Redirige a la página principal después de crear exitosamente
-              router.push("/");
+              // Redirige a la página de maestros después de crear exitosamente
+              router.push("/maestro");
             }}
           />
         </div>

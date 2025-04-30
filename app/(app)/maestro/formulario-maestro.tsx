@@ -16,35 +16,35 @@ import { Id } from "@/convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-type Estudiante = {
-  _id?: Id<"estudiantes">;
-  numeroMatricula: string;
+type Maestro = {
+  _id?: Id<"maestros">;
+  numeroEmpleado: string;
   nombre: string;
   correo: string;
-  carrera: string;
-  grado: string;
+  departamento: string;
+  especialidad: string;
 };
 
-export function FormularioEstudiante({
-  estudiante,
+export function FormularioMaestro({
+  maestro,
   onSuccess,
 }: {
-  estudiante?: Estudiante;
+  maestro?: Maestro;
   onSuccess?: () => void;
 }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createMutation = useMutation(api.estudiantes.crearEstudiante);
-  const updateMutation = useMutation(api.estudiantes.actualizarEstudiante);
+  const createMutation = useMutation(api.maestros.crearMaestro);
+  const updateMutation = useMutation(api.maestros.actualizarMaestro);
 
   const [formData, setFormData] = useState({
-    numeroMatricula: estudiante?.numeroMatricula || "",
-    nombre: estudiante?.nombre || "",
-    correo: estudiante?.correo || "",
-    carrera: estudiante?.carrera || "",
-    grado: estudiante?.grado || "",
+    numeroEmpleado: maestro?.numeroEmpleado || "",
+    nombre: maestro?.nombre || "",
+    correo: maestro?.correo || "",
+    departamento: maestro?.departamento || "",
+    especialidad: maestro?.especialidad || "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,9 +62,9 @@ export function FormularioEstudiante({
     setError(null);
 
     try {
-      if (estudiante?._id) {
+      if (maestro?._id) {
         await updateMutation({
-          id: estudiante._id,
+          id: maestro._id,
           ...formData
         });
       } else {
@@ -91,13 +91,13 @@ export function FormularioEstudiante({
       )}
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Matrícula</label>
+        <label className="block text-sm font-medium text-gray-700">Número de Empleado</label>
         <Input
-          name="numeroMatricula"
-          value={formData.numeroMatricula}
+          name="numeroEmpleado"
+          value={formData.numeroEmpleado}
           onChange={handleChange}
           required
-          placeholder="Ingresa el número de matrícula"
+          placeholder="Ingresa el número de empleado"
           className="w-full transition-all focus-within:ring-2 focus-within:ring-blue-500"
         />
       </div>
@@ -122,22 +122,24 @@ export function FormularioEstudiante({
           value={formData.correo}
           onChange={handleChange}
           required
-          placeholder="ejemplo@universidad.edu"
+          placeholder="profesor@universidad.edu"
           className="w-full"
         />
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Carrera</label>
+        <label className="block text-sm font-medium text-gray-700">Departamento</label>
         <Select
-          value={formData.carrera}
-          onValueChange={(value) => handleSelectChange("carrera", value)}
+          value={formData.departamento}
+          onValueChange={(value) => handleSelectChange("departamento", value)}
           required
         >
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="Selecciona una carrera" />
+            <SelectValue placeholder="Selecciona un departamento" />
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value="Ciencias">Ciencias</SelectItem>
+            <SelectItem value="Humanidades">Humanidades</SelectItem>
             <SelectItem value="Ingeniería">Ingeniería</SelectItem>
             <SelectItem value="Medicina">Medicina</SelectItem>
             <SelectItem value="Derecho">Derecho</SelectItem>
@@ -146,19 +148,23 @@ export function FormularioEstudiante({
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Grado académico</label>
+        <label className="block text-sm font-medium text-gray-700">Especialidad</label>
         <Select
-          value={formData.grado}
-          onValueChange={(value) => handleSelectChange("grado", value)}
+          value={formData.especialidad}
+          onValueChange={(value) => handleSelectChange("especialidad", value)}
           required
         >
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="Selecciona un grado" />
+            <SelectValue placeholder="Selecciona una especialidad" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="1er Semestre">1er Semestre</SelectItem>
-            <SelectItem value="2do Semestre">2do Semestre</SelectItem>
-            <SelectItem value="3er Semestre">3er Semestre</SelectItem>
+            <SelectItem value="Matemáticas">Matemáticas</SelectItem>
+            <SelectItem value="Física">Física</SelectItem>
+            <SelectItem value="Química">Química</SelectItem>
+            <SelectItem value="Literatura">Literatura</SelectItem>
+            <SelectItem value="Historia">Historia</SelectItem>
+            <SelectItem value="Sistemas">Sistemas</SelectItem>
+            <SelectItem value="Civil">Civil</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -168,7 +174,7 @@ export function FormularioEstudiante({
         <Button
           type="button"
           variant="outline"
-          onClick={() => router.push("/estudiante")}
+          onClick={() => router.push("/maestro")}
           disabled={isSubmitting}
           className="w-full sm:w-auto"
         >
@@ -185,7 +191,7 @@ export function FormularioEstudiante({
               Procesando...
             </>
           ) : (
-            estudiante ? "Guardar cambios" : "Crear estudiante"
+            maestro ? "Guardar cambios" : "Crear maestro"
           )}
         </Button>
       </div>

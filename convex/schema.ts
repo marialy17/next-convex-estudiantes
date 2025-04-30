@@ -14,6 +14,6 @@ export default defineSchema({
     nombre: v.string(),
     correo: v.string(),
     departamento: v.string(),
-    gradoAcademico: v.string(),
+    especialidad: v.string(),
   }),
 });

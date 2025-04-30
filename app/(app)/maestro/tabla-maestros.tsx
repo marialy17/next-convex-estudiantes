@@ -9,10 +9,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
-import { DialogEliminarMaestro } from "../maestro/dialog-eliminar-maestro";
-import { DialogMaestro } from "../maestro/dialog-maestro";
+} from "@/app/_styles/components/ui/table";
+import { Skeleton } from "@/app/_styles/components/ui/skeleton";
+import { Button } from "@/app/_styles/components/ui/button";
+import { CirclePlus, Edit, Eye } from "lucide-react";
+import Link from "next/link";
+import { DialogEliminarMaestro } from "./dialog-eliminar-maestro";
 
 export function TablaMaestros() {
   const maestros = useQuery(api.maestros.obtenerMaestros);
@@ -52,9 +54,14 @@ export function TablaMaestros() {
       <div className="flex flex-col p-4">
         <div className="flex justify-between p-4">
           <p className="text-lg font-semibold">Lista de Maestros</p>
-          <div className="flex justify-end"><DialogMaestro /></div>
+          <div className="flex justify-end">
+            <Link href="/maestro/nuevo">
+              <Button variant="outline" size="icon">
+                <CirclePlus className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
-
 
         <Table>
           <TableHeader>
@@ -63,7 +70,7 @@ export function TablaMaestros() {
               <TableHead>Nombre</TableHead>
               <TableHead>Correo</TableHead>
               <TableHead>Departamento</TableHead>
-              <TableHead>Grado académico</TableHead>
+              <TableHead>Especialidad</TableHead>
               <TableHead className="text-center">Acciones</TableHead>
             </TableRow>
           </TableHeader>
@@ -75,7 +82,7 @@ export function TablaMaestros() {
                 </TableCell>
               </TableRow>
             ) : (
-                maestros.map((maestro) => (
+              maestros.map((maestro) => (
                 <TableRow key={maestro._id}>
                   <TableCell className="font-medium">
                     {maestro.numeroEmpleado}
@@ -83,11 +90,20 @@ export function TablaMaestros() {
                   <TableCell>{maestro.nombre}</TableCell>
                   <TableCell>{maestro.correo}</TableCell>
                   <TableCell>{maestro.departamento}</TableCell>
-                  <TableCell>{maestro.gradoAcademico}</TableCell>
-                  <TableCell >
+                  <TableCell>{maestro.especialidad}</TableCell>
+                  <TableCell>
                     <div className="flex gap-2 justify-end">
                       <DialogEliminarMaestro id={maestro._id} />
-                      <DialogMaestro maestro={maestro} />
+                      <Link href={`/maestro/ver/${maestro._id}`}>
+                        <Button variant="outline" size="icon">
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                      </Link>
+                      <Link href={`/maestro/editar/${maestro._id}`}>
+                        <Button variant="outline" size="icon">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                      </Link>
                     </div>
                   </TableCell>
                 </TableRow>

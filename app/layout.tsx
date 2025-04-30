@@ -4,12 +4,12 @@
  *   Incluye: proveedor de temas, barra de navegación y contenido principal.
  */
 
-import { ThemeProvider } from "@/components/theme/theme-provider"
+import { ThemeProvider } from "@/app/_styles/components/theme/theme-provider"
 import type { Metadata } from "next";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import "@/styles/globals.css";
-import { ConvexClientProvider } from "@/components/ConvexClientProvider";
+import { Navbar } from "@/app/_styles/components/layout/navbar";
+import { Footer } from "@/app/_styles/components/layout/footer";
+import "@/app/_styles/globals.css";
+import { ConvexClientProvider } from "@/app/_styles/components/ConvexClientProvider";
 
 /**
  * * Metadatos globales de la aplicación.
@@ -17,8 +17,8 @@ import { ConvexClientProvider } from "@/components/ConvexClientProvider";
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-metadata
  */
 export const metadata: Metadata = {
-  title: "Mi Negocio",
-  description: "WebApp para gestionar mi negocio",
+  title: "Sistema de Gestión de Estudiantes y Maestros",
+  description: "Plataforma para la administración de estudiantes y maestros",
   icons: {
     icon: "/favicon.ico",
   },

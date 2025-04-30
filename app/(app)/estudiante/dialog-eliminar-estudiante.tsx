@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/_styles/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/app/_styles/components/ui/dialog";
 import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";

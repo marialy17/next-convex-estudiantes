@@ -9,10 +9,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
-import { CirclePlus, Edit } from "lucide-react";
+} from "@/app/_styles/components/ui/table";
+import { Skeleton } from "@/app/_styles/components/ui/skeleton";
+import { Button } from "@/app/_styles/components/ui/button";
+import { CirclePlus, Edit, Eye } from "lucide-react";
 import Link from "next/link";
 import { DialogEliminarEstudiante } from "./dialog-eliminar-estudiante";
 
@@ -92,8 +92,13 @@ export function TablaEstudiantes() {
                   <TableCell>{estudiante.carrera}</TableCell>
                   <TableCell>{estudiante.grado}</TableCell>
                   <TableCell>
-                    <div className="flex gap-2 justify-end">
+                  <div className="flex gap-2 justify-end">
                       <DialogEliminarEstudiante id={estudiante._id} />
+                      <Link href={`/estudiante/ver/${estudiante._id}`}>
+                        <Button variant="outline" size="icon">
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                      </Link>
                       <Link href={`/estudiante/editar/${estudiante._id}`}>
                         <Button variant="outline" size="icon">
                           <Edit className="h-4 w-4" />

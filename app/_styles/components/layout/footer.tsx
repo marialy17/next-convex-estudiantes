@@ -7,7 +7,6 @@
 
 import Link from "next/link";
 import { Instagram, Facebook, Twitter } from "lucide-react";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 export function Footer(): React.ReactElement {
   return (
@@ -16,7 +15,7 @@ export function Footer(): React.ReactElement {
         {/* Brand + navegación rápida */}
         <div className="flex flex-col items-center gap-2 sm:items-start">
           <span className="text-lg font-semibold tracking-wide">
-            © {new Date().getFullYear()} Strawberry Ticket
+            © {new Date().getFullYear()} Escuela GM
           </span>
           <nav className="flex flex-wrap gap-4 text-sm text-muted-foreground">
             <Link href="/about" className="transition hover:text-foreground">
@@ -67,8 +66,6 @@ export function Footer(): React.ReactElement {
             <Twitter className="h-5 w-5" />
           </Link>
 
-          {/* Interruptor de tema claro/oscuro */}
-          <ThemeToggle />
         </div>
       </div>
     </footer>
