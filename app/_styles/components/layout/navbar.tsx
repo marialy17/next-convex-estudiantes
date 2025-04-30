@@ -107,7 +107,7 @@ export const Navbar: React.FC = () => {
               key={route.href}
               href={route.href}
               className={cn(
-                "flex items-center text-sm font-medium transition-colors hover:text-primary",
+                "flex items-center text-sm font-medium transition-colors hover:text-primary p-2 rounded-md",
                 route.active
                   ? "text-black dark:text-white"
                   : "text-muted-foreground"
