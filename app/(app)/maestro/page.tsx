@@ -1,3 +1,4 @@
+//app/(app)/maestro/page.tsx
 "use client";
 
 import { TablaMaestros } from "./tabla-maestros";

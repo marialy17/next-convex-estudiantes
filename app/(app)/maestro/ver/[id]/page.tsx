@@ -107,7 +107,7 @@ export default function VerMaestroPage({ params }: { params: Promise<{ id: strin
             <div className="flex gap-2">
               <DialogEliminarMaestro 
                 id={maestro._id} 
-                onDelete={() => router.push("/maestro")} 
+                onSuccess={() => router.push("/maestro")} 
               />
               <Link href={`/maestro/editar/${maestro._id}`}>
                 <Button variant="outline" size="icon">
